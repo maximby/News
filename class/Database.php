@@ -7,7 +7,7 @@ class Database {
      * Construct
      */
     function __construct() {
-        $dsn = 'mysql:dbname=testdb;host=127.0.0.1';
+        $dsn = 'mysql:dbname=world_news;host=127.0.0.1';
         $user = 'root';
         $password = '';
 
@@ -16,7 +16,7 @@ class Database {
 
     /**
      * Запускает SQL запрос на выполнение и возвращает количество строк, задействованных в ходе его выполнения
-     * @param $sql
+     * @param $sql string
      * @return int
      */
     function exec($sql) {
@@ -25,8 +25,8 @@ class Database {
 
     /**
      * Принимает sql запрос и возвращает массив объектов указанного класса
-     * @param $sql
-     * @param $class
+     * @param $sql string
+     * @param $class string
      * @return array|bool
      */
     public function queryAll($sql, $class) {
@@ -46,6 +46,14 @@ class Database {
         return $this->queryAll($sql, $class)[0];
     }
 
+    /**
+     * Возвращает экранированную строку
+     * @param $param mixed
+     * @return string
+     */
+    public function quote($param) {
+        return $this->db->quote($param);
+    }
 }
 
 
