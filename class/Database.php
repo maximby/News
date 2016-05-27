@@ -1,7 +1,7 @@
 <?php
 
 class Database {
-    protected $db;
+    protected $dbh;
 
     /**
      * Construct
@@ -11,7 +11,7 @@ class Database {
         $user = 'root';
         $password = '';
 
-        $this->db = new PDO($dsn, $user, $password);
+        $this->dbh = new PDO($dsn, $user, $password);
     }
 
     /**
@@ -20,7 +20,7 @@ class Database {
      * @return int
      */
     function exec($sql) {
-        return $this->db->exec($sql);
+        return $this->dbh->exec($sql);
     }
 
     /**
@@ -30,7 +30,7 @@ class Database {
      * @return array|bool
      */
     public function queryAll($sql, $class) {
-        if (!$stmt = $this->db->query($sql))
+        if (!$stmt = $this->dbh->query($sql))
             return false;
         $stmt->setFetchMode( PDO::FETCH_CLASS, $class);
         return $stmt->fetchAll();
@@ -52,7 +52,7 @@ class Database {
      * @return string
      */
     public function quote($param) {
-        return $this->db->quote($param);
+        return $this->dbh->quote($param);
     }
 }
 

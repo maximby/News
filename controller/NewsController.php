@@ -3,14 +3,21 @@
 class NewsController {
 
     public function actionAll()  {
-        $items = News::getAll();
-        //var_dump($items);
-        include __DIR__ . '/../view/news/all.php';
+        $news = News::getAll();
+
+        $view = new View();
+
+        $view->items = $news;
+        $view->display('news/all.php');
+
     }
 
     public function actionOne()  {
         $id = $_GET['id'];
-        $item = News::getOne($id);
-        include __DIR__ . '/../view/news/one.php';
+        $news = News::getOne($id);
+        $view = new View();
+
+        $view->item = $news;
+        $view->display('news/one.php');
     }
 }
