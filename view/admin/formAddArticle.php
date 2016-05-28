@@ -23,10 +23,11 @@ if (isset($_POST['go'])) {
 
     $eEn = $el1.$el2;
 
+    var_dump($news);
     if ($eEn == null) {
         $news->title = $title;
         $news->text = $text;
-        $news->ssve();
+        $news->insert();
         $title = null;
         $text = null;
     }
@@ -88,7 +89,7 @@ if (isset($_POST['go'])) {
     <p class="lead">Добавление новой статьи</p>
 </div
 <div class="forms">
-    <form  action="form.php" method="post" name="add_article" >
+    <form  action="http://localhost:63342/php4/lynda/News/index.php?cntrl=Admin&act=FormAddArticle" method="post" name="add_article" >
         <p><input type="text" name="title" id="title" value="<?=$title?>" size="95"  />
             <span> Название статьи</span>
             <br />

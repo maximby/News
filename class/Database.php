@@ -1,8 +1,13 @@
 <?php
 
 class Database {
+
+    /**
+     * @var PDO
+     */
     protected $dbh;
 
+    protected $className = 'stdClass';
     /**
      * Construct
      */
@@ -15,11 +20,36 @@ class Database {
     }
 
     /**
+     * Задает имя класса
+     * @param $className
+     */
+    public function setClassName($className) {
+
+        $this->className = $className;
+
+    }
+    public function query($sql, $param = []) {
+
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->execute($param);
+        return $stmt->fetchAll(PDO::FETCH_CLASS, $this->className);
+    }
+
+    public function exec($sql, $param = []) {
+
+            $stmt = $this->dbh->prepare($sql);
+            return $stmt->execute($param);
+        }
+
+
+
+
+    /**
      * Запускает SQL запрос на выполнение и возвращает количество строк, задействованных в ходе его выполнения
      * @param $sql string
      * @return int
      */
-    function exec($sql) {
+    function execu($sql) {
         return $this->dbh->exec($sql);
     }
 
